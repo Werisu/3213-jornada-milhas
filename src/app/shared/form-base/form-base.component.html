@@ -54,17 +54,19 @@
                 <mat-radio-button value="outro">Prefiro não informar</mat-radio-button>
               </mat-radio-group>
             </div>
-            <mat-form-field appearance="outline">
-              <mat-label>Telefone</mat-label>
-              <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
-              <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
-            </mat-form-field>
-            <app-dropdown-uf
-              label="Estado"
-              placeholder="Estado"
-              [control]="estadoControl">
-            </app-dropdown-uf>
-            <mat-error *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
+              <mat-form-field appearance="outline">
+                <mat-label>Telefone</mat-label>
+                <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
+                <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
+              </mat-form-field>
+            <div class="drop-container">
+              <app-dropdown-uf
+                label="Estado"
+                placeholder="Estado"
+                [control]="estadoControl">
+              </app-dropdown-uf>
+              <mat-error class="custom-error" *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
+          </div>
           </div>
         </div>
       </mat-card-content>
