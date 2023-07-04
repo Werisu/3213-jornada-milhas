@@ -39,6 +39,7 @@ import { FormBaseComponent } from './shared/form-base/form-base.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CadastroComponent } from './pages/cadastro/cadastro.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SeletorPassageiroComponent,
     DepoimentosComponent,
     LoginComponent,
-    FormBaseComponent
+    FormBaseComponent,
+    CadastroComponent
   ],
   imports: [
     BrowserModule,
