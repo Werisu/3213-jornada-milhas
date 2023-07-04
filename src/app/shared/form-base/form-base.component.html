@@ -33,6 +33,9 @@
               <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
                 Data de Nascimento é obrigatória
               </mat-error>
+              <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['dataInvalida']">
+                Data de Nascimento inválida
+              </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
@@ -96,11 +99,13 @@
               <input matInput formControlName="confirmarEmail" placeholder="Digite seu e-mail novamente">
               <mat-error *ngIf="cadastroForm.get('confirmarEmail')?.errors?.['required']">Confirmação de E-mail é obrigatória</mat-error>
               <mat-error *ngIf="cadastroForm.get('confirmarEmail')?.errors?.['email']">E-mail inválido</mat-error>
+              <mat-error *ngIf="cadastroForm.get('confirmarEmail')?.errors?.['equalTo']">E-mails não coincidem</mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>Confirmar Senha</mat-label>
               <input matInput formControlName="confirmarSenha" type="password" placeholder="Repita sua senha">
               <mat-error *ngIf="cadastroForm.get('confirmarSenha')?.errors?.['required']">Confirmação de Senha é obrigatória</mat-error>
+              <mat-error *ngIf="cadastroForm.get('confirmarSenha')?.errors?.['equalTo']">Senhas não coincidem</mat-error>
             </mat-form-field>
           </div>
         </div>
