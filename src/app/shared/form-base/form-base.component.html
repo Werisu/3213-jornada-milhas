@@ -2,7 +2,7 @@
   <mat-card>
     <form [formGroup]="cadastroForm">
       <mat-card-title>
-        {{ titulo }}
+        Crie sua conta
       </mat-card-title>
       <section>
         <div class="acoesPerfil" *ngIf="perfilComponent">
@@ -32,9 +32,6 @@
               <mat-datepicker #nascimento></mat-datepicker>
               <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
                 Data de Nascimento é obrigatória
-              </mat-error>
-              <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['dataInvalida']">
-                Data de Nascimento inválida
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
@@ -119,7 +116,7 @@
           [disabled]="cadastroForm.invalid"
           (click)="executarAcao()"
           color="primary"
-        >{{ textoBotao }}
+        >CADASTRAR
         </button>
       </mat-card-actions>
     </form>
