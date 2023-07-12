@@ -2,7 +2,7 @@
   <mat-card>
     <form [formGroup]="cadastroForm">
       <mat-card-title>
-        {{ titulo }}
+        Crie sua conta
       </mat-card-title>
       <section>
         <div class="acoesPerfil" *ngIf="perfilComponent">
@@ -33,9 +33,6 @@
               <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['required']">
                 Data de Nascimento é obrigatória
               </mat-error>
-              <mat-error *ngIf="cadastroForm.get('nascimento')?.errors?.['dataInvalida']">
-                Data de Nascimento inválida
-              </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline">
               <mat-label>CPF</mat-label>
@@ -57,11 +54,11 @@
                 <mat-radio-button value="outro">Prefiro não informar</mat-radio-button>
               </mat-radio-group>
             </div>
-              <mat-form-field appearance="outline">
-                <mat-label>Telefone</mat-label>
-                <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
-                <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
-              </mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Telefone</mat-label>
+              <input matInput formControlName="telefone" placeholder="+XX XXXX-XXXX">
+              <mat-error *ngIf="cadastroForm.get('telefone')?.errors">Telefone é obrigatório</mat-error>
+            </mat-form-field>
             <div class="drop-container">
               <app-dropdown-uf
                 label="Estado"
@@ -69,7 +66,7 @@
                 [control]="estadoControl">
               </app-dropdown-uf>
               <mat-error class="custom-error" *ngIf="estadoControl?.errors && estadoControl?.touched">Estado é obrigatório</mat-error>
-          </div>
+            </div>
           </div>
         </div>
       </mat-card-content>
@@ -115,11 +112,10 @@
         </mat-error>
       </mat-card-content>
       <mat-card-actions class="full-width">
-        <button mat-flat-button
+        <button (click)="executarAcao()" mat-flat-button
           [disabled]="cadastroForm.invalid"
-          (click)="executarAcao()"
           color="primary"
-        >{{ textoBotao }}
+        >CADASTRAR
         </button>
       </mat-card-actions>
     </form>
