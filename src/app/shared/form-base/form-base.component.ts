@@ -28,21 +28,26 @@ export class FormBaseComponent implements OnInit{
     this.cadastroForm = this.formBuilder.group({
       nome: [null, Validators.required],
       nascimento: [null, [Validators.required]],
-      cpf: ['12312312123', [Validators.required]],
-      cidade: ['City', Validators.required],
-      email: ['chapolin@email.com', [Validators.required, Validators.email]],
-      senha: ['123', [Validators.required, Validators.minLength(3)]],
+      cpf: [null, [Validators.required]],
+      cidade: [null, Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      senha: [null, [Validators.required, Validators.minLength(3)]],
       genero: ['outro'],
-      telefone: ['12312312123', Validators.required],
+      telefone: [null, Validators.required],
       estado: this.estadoControl,
-      confirmarEmail: ['chapolin@email.com', [Validators.required, Validators.email, FormValidations.equalTo('email')]],
-      confirmarSenha: ['123', [Validators.required, Validators.minLength(3), FormValidations.equalTo('senha')]]
+      confirmarEmail: [null, [Validators.required, Validators.email, FormValidations.equalTo('email')]],
+      confirmarSenha: [null, [Validators.required, Validators.minLength(3), FormValidations.equalTo('senha')]],
+      aceitarTermos: [false, [Validators.requiredTrue]]
     });
 
-    if(!this.perfilComponent) {
-      this.cadastroForm.addControl('aceitarTermos', new FormControl(false, Validators.requiredTrue))
+    if(this.perfilComponent){
+      this.cadastroForm.get('aceitarTermos')?.setValidators(null)
+    } else {
+      this.cadastroForm.get('aceitarTermos')?.setValidators([Validators.requiredTrue])
     }
-    
+
+    this.cadastroForm.get('aceitarTermos')?.updateValueAndValidity();
+
     this.formularioService.setCadastro(this.cadastroForm)
   }
 
