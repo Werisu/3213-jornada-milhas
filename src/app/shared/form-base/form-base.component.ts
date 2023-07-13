@@ -13,8 +13,11 @@ export class FormBaseComponent implements OnInit{
   cadastroForm!: FormGroup;
   estadoControl = new FormControl<UnidadeFederativa | null>(null, Validators.required);
 
-  @Input() perfilComponent!: boolean;
+  @Input() perfilComponent: boolean = false;
+  @Input() titulo: string = 'Crie sua conta';
+  @Input() textoBotao: string = 'CADASTRAR';
   @Output() acaoClique: EventEmitter<any> = new EventEmitter<any>()
+  @Output() sair: EventEmitter<any> = new EventEmitter<any>()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,13 +36,21 @@ export class FormBaseComponent implements OnInit{
       telefone: ['12312312123', Validators.required],
       estado: this.estadoControl,
       confirmarEmail: ['chapolin@email.com', [Validators.required, Validators.email, FormValidations.equalTo('email')]],
-      confirmarSenha: ['123', [Validators.required, Validators.minLength(3), FormValidations.equalTo('senha')]],
-      aceitarTermos: [false, [Validators.requiredTrue]]
+      confirmarSenha: ['123', [Validators.required, Validators.minLength(3), FormValidations.equalTo('senha')]]
     });
+
+    if(!this.perfilComponent) {
+      this.cadastroForm.addControl('aceitarTermos', new FormControl(false, Validators.requiredTrue))
+    }
+    
     this.formularioService.setCadastro(this.cadastroForm)
   }
 
   executarAcao() {
     this.acaoClique.emit();
+  }
+
+  deslogar() {
+    this.sair.emit();
   }
 }
