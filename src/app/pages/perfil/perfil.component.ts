@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
 import { CadastroService } from 'src/app/core/services/cadastro.service';
 import { FormularioService } from 'src/app/core/services/formulario.service';
 import { TokenService } from 'src/app/core/services/token.service';
-import { UserService } from 'src/app/core/services/user.service';
 import { PessoaUsuaria } from 'src/app/core/types/type';
 
 @Component({
@@ -12,9 +10,11 @@ import { PessoaUsuaria } from 'src/app/core/types/type';
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.scss']
 })
-export class PerfilComponent {
+export class PerfilComponent implements OnInit{
   titulo = 'Olá, ';
   textoBotao = 'ATUALIZAR';
+  perfilComponent = true;
+
   cadastro!: PessoaUsuaria;
   token: string = '';
   nome: string = '';
@@ -22,9 +22,7 @@ export class PerfilComponent {
 
   constructor(
     private cadastroService: CadastroService,
-    private router: Router,
     private tokenService: TokenService,
-    private userService: UserService,
     private formularioService: FormularioService
   ) { }
 
@@ -33,14 +31,12 @@ export class PerfilComponent {
     this.cadastroService.buscarCadastro(this.token).subscribe(cadastro => {
       this.cadastro = cadastro;
       this.nome = cadastro.nome;
-
       this.carregarFormulario();
     })
   }
 
   carregarFormulario() {
     this.form = this.formularioService.getCadastro();
-
     this.form?.patchValue({
       nome: this.cadastro.nome,
       nascimento: this.cadastro.nascimento,
@@ -54,22 +50,12 @@ export class PerfilComponent {
     });
   }
 
-  atualizarPerfil() {
-    this.cadastroService.editarCadastro(this.cadastro, this.token).subscribe({
-      next: () => {
-        console.log('Cadastro editado com sucesso', this.cadastro);
-        this.router.navigate(['']);
-      },
-      error: (err) => {
-        console.log(err);
-        console.log(this.cadastro);
-      }
-    })
-  }
-
   deslogar() {
-    this.userService.logout();
-    this.router.navigate(['/login']);
+    console.log('Logout realizado com sucesso')
   }
-}
 
+  atualizar() {
+    console.log('Cadastro atualizado com sucesso')
+  }
+
+}
